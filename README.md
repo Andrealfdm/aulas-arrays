@@ -47,4 +47,3 @@ php exercicio01.php
 ![PHP](https://img.shields.io/badge/PHP-8.x-777BB4?logo=php&logoColor=white)
 ![Terminal](https://img.shields.io/badge/Ambiente-Terminal%20(CLI)-black?logo=windowsterminal)
 ![Arrays](https://img.shields.io/badge/Tema-Arrays-blue)
-![Loops](https://img.shields.io/badge/Loops-for%20%7C%20while%20%7C%20do--while-green)
