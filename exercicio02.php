@@ -54,3 +54,65 @@
  */
 
 // Escreva seu código aqui:
+
+$lista_nota = [];
+$lista_nomes = [];
+
+
+$qt_alunos = readline("Digite a quantidade de alunos: ");
+
+$i= 0;
+while($i < $qt_alunos){
+    $nome_alunos = readline("Digite nome do alunos: ");
+    $lista_nomes[$i] = $nome_alunos;
+
+    $nota_alunos = readline("Digite a nota do aluno: ");
+    $lista_nota[$i] = $nota_alunos;
+    $i++;
+}
+
+
+$soma_nota = 0;
+$cont = 0;
+$maior_nota = 0;
+$menor_nota = 999999;
+
+
+foreach($lista_nota as $nota){
+    $soma_nota = $soma_nota + $nota;
+    $cont  ++;
+    
+    if($nota > $maior_nota){
+        $maior_nota = $nota;
+
+    }if($menor_nota > $nota){
+        $menor_nota = $nota;
+    }
+}
+
+
+$tamanho = count($lista_nomes);
+echo"\n\n";
+echo"     === BOLETIM ===\n";
+
+for($i = 0; $i < $tamanho; $i++){
+    if($lista_nota[$i] >= 8.5){
+        echo "Aluno  - ".$lista_nomes[$i]." - Nota: ".$lista_nota[$i]." APROVADO \n";
+
+    }if($lista_nota[$i] < 8.5 && $lista_nota[$i] >= 6.5){
+        echo "Aluno  - ".$lista_nomes[$i]." - Nota: ".$lista_nota[$i]." RECUPERAÇÃO \n";
+
+    }if($lista_nota[$i] < 6.5){
+        echo "Aluno  - ".$lista_nomes[$i]." - Nota: ".$lista_nota[$i]." REPROVADO \n";
+    }
+     
+}
+
+
+echo" === ESTATÍSTICAS ===\n";
+echo"Média da tuma: ".($soma_nota /$cont)."\n";
+echo"Maior nota: " .$maior_nota."\n";
+echo"Menor nota: ". $menor_nota."\n";
+echo"Classificação: Turma BOA";
+  
+ 

@@ -54,3 +54,65 @@
  */
 
 // Escreva seu código aqui:
+
+$palavras = ["ABACAXI", "ELEFANTE", "PROGRAMAR", "TECLADO", "MONITOR"];
+$palavra_secreta = $palavras[rand(0, count($palavras) - 1)];
+$letras_descobertas = [];
+
+
+$letra_usada = "";
+$erros = 0;
+$nome_completo = "";
+$vitoria = 0;
+
+
+echo "       \n=== JOGO DA FORCA ===\n";
+echo "ABACAXI, ELEFANTE, PROGRAMAR, TECLADO, MONITOR\n\n";
+
+
+for($f = 0; $f < strlen($palavra_secreta); $f++){
+        $letras_descobertas[$f] = "-";
+}
+
+while(true){
+
+
+    echo"palavra: ";
+    for($f = 0; $f < strlen($palavra_secreta); $f++){
+        echo $letras_descobertas[$f];  
+    }
+    echo"\n";
+
+    echo"Letras usadas: ". $letra_usada. "\n";
+
+    echo"Erros: ". $erros. "/6\n";
+
+    $letra = strtoupper(readline("Digite uma letra: "));
+
+    $trava = 0;
+    for($j = 0; $j < strlen($palavra_secreta); $j++){
+        if($letra == $palavra_secreta[$j]){
+            $letras_descobertas[$j] = $letra;
+            $trava = 1;
+        }
+
+    }if($palavra_secreta == implode("",$letras_descobertas)){
+        echo"parabéns você venceu ";
+        exit;
+
+    }if($trava == 0){
+        $erros += 1;
+        echo"Letra não encontrada !";
+
+        if($erros == 6){ # caso numero de tentativas chegue a 6 jogador perde
+        echo"\nVocê perdeu , 0 tentativas !";
+        echo"\n\n";
+
+        exit;
+       }
+    }
+    echo"\n\n";
+}
+    
+
+#

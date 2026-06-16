@@ -53,3 +53,112 @@
  */
 
 // Escreva seu código aqui:
+$produtos   = ["Caneta", "Caderno", "Borracha", "Lapis", "Mochila"];
+$precos     = [2.50, 15.00, 1.50, 1.00, 89.90];
+$quantidades = [100, 50, 200, 150, 20];
+
+
+$parada = true;
+while($parada){
+
+    echo "\n\n=== CONTROLE DE ESTOQUE ===\n"; 
+    echo" [1] Listar  [2] Vender  [3] Repor  [4] Relatório  [0] Sair\n\n";
+    echo"\n";
+
+    $opcao = readline("escolha a opção: ");
+    echo"\n";
+
+   switch($opcao){
+    case 0:
+        echo"Estoque final salvo!";
+        $parada = false;
+        break;
+
+    case 1:
+
+        printf("%-3s | %-10s | %-9s | %-6s | %-10s\n", "ID", "Produto", "Preço", "Qtd", "Val. Total");
+        echo "---------------------------------------------------------\n";
+
+        $j = 1;
+
+        for($i = 0; $i < count($produtos); $i++){
+
+            $valor_total = $precos[$i] * $quantidades[$i];
+            $preco_formatado = "R$" . number_format($precos[$i], 2, ',', '.');
+            $valor_total_formatado = "R$" .  number_format($valor_total, 2, ',', '.'); 
+
+            printf( "%-3d |* %-9s | %-8s | %-5d  | %-10s\n",
+            $j,
+            $produtos[$i],
+            $preco_formatado,
+            $quantidades[$i],
+            $valor_total_formatado
+            );
+            $j++;
+        }
+        break;
+
+    case 2:
+        echo"\n";
+        $id = readline("escolha ID, do 1* -- 5*: ");
+        echo"\n";
+
+        if(!is_numeric($id) || $id <= 0 || $id > 5){
+            echo"ID incorreto!\n";
+        }else{
+        echo"ID do produto: " . $id ."\n";
+        echo"Estoque atual: " . $quantidades[$id - 1] . "\n";
+
+        $venda = readline("QT: a ser vendida: ");
+
+        $quantidades[$id - 1] -= $venda;
+
+        echo"Estoque apos venda: " . $quantidades[$id - 1] . "\n";
+        }
+        break;
+    
+    case 3:
+        #Repor estoque → peça o ID e a quantidade a adicionar
+        echo"Repor estoque!\n";
+        $id = readline("escolha ID, do 1* -- 5*:  ");
+
+        if(!is_numeric($id) || $id <= 0 || $id > 5){
+            echo"ID incorreto!\n";
+            break;
+        }else{
+            echo"Estoque atual: " . $quantidades[$id - 1] . "\n";
+
+            $repor = readline("QT de iténs entrando no estoque: ");
+
+            $quantidades[$id - 1] += $repor;
+            echo"Adicionado itens ao estoque: " . $quantidades[$id - 1] . "\n";
+        break;
+        }
+    case 4:
+        $total = 0;
+        $maior_valor = 0;
+        $maior_estoque = 0;
+        $nome_maior_estoque = "";
+
+        for($i = 0; $i < count($produtos); $i++){
+            (float)$total += $precos[$i] * $quantidades[$i];
+
+            if($precos[$i] > $maior_valor){
+                $maior = $precos[$i];
+
+            }if($quantidades[$i] > $maior_estoque){
+                $nome_maior_estoque = $produtos[$i];
+                $maior_estoque = $quantidades[$i];
+            }
+        }
+
+        echo "Valor total em estoque R$:". number_format($total,2, ",", ".");
+        echo"\n                        ---------\n";
+        echo "Produto mais caro: Mochila (R$ 89.90)\n";
+        echo"Maior estoque: ".$nome_maior_estoque. " (". $maior_estoque. " un)\n";
+        break;
+
+    default:
+        echo"Opção invalida!";
+   }
+}
